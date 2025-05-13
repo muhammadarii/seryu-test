@@ -7,14 +7,13 @@ import Link from "next/link";
 
 export const NowPlayingList = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["movie"],
+    queryKey: ["NowPlaying"],
     queryFn: fetchNowPlayingMovies,
   });
 
   const setSelectedMovieId = useMovieStore((state) => state.setSelectedMovieId);
 
   if (isLoading) return <div>Loading...</div>;
-
   if (error) return <p>Failed to load movies</p>;
 
   return (

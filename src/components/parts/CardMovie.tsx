@@ -1,12 +1,7 @@
 "use client";
+import { CardMovieProps } from "@/types";
 import Image from "next/image";
 import { CiBookmark, CiHeart } from "react-icons/ci";
-
-interface CardMovieProps {
-  onClick: () => void;
-  title: string;
-  src: string;
-}
 
 export const CardMovie: React.FC<CardMovieProps> = ({
   onClick,
@@ -28,7 +23,9 @@ export const CardMovie: React.FC<CardMovieProps> = ({
         </div>
       </div>
       <div className="px-[18px] py-[15px]">
-        <h1 className="text-[18px] font-bold text-[#B6B6B6]">{title}</h1>
+        <h1 className="text-[18px] font-bold text-[#B6B6B6] truncate">
+          {title}
+        </h1>
         <p className="text-[12px] font-normal text-[#828282]">2025</p>
       </div>
     </div>
