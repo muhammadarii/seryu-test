@@ -22,13 +22,13 @@ export const fetchNowPlayingMovies = async (): Promise<MovieResponse> => {
   }
 };
 
-export const fetchMovieDetails = async (movieId: number): Promise<Movie> => {
+export const fetchMovieDetails = async (movie_id: number): Promise<Movie> => {
   try {
     const response = await axios.get<Movie>(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${movieId}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${movie_id}`,
       {
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
         },
         params: {
           language: "en-US",
@@ -59,6 +59,30 @@ export const fetchTopRatedMovies = async (): Promise<MovieResponse> => {
     return response.data;
   } catch (error) {
     console.error("Error fetching top rated movies:", error);
+    throw error;
+  }
+};
+
+export const fetchRecommendedMovies = async (
+  movie_id: number
+): Promise<Movie[]> => {
+  try {
+    const response = await axios.get<Movie[]>(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${movie_id}/recommendations`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+        },
+        params: {
+          language: "en-US",
+          page: 1,
+        },
+      }
+    );
+    console.log(response.data);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching recommended movies:", error);
     throw error;
   }
 };

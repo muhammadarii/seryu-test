@@ -1,5 +1,5 @@
-import { NowPlayingList } from "@/components/parts/NowPlayingList";
-import { TopRatedList } from "@/components/parts/TopRatedList";
+import { NowPlayingList } from "@/components/section/NowPlayingList";
+import { TopRatedList } from "@/components/section/TopRatedList";
 import React from "react";
 
 const Home = () => {

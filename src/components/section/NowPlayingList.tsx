@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { CardMovie } from "./CardMovie";
+import { CardMovie } from "../parts/CardMovie";
 import { fetchNowPlayingMovies } from "@/lib/api";
 import { useMovieStore } from "@/store/movieStore";
 import Link from "next/link";
@@ -22,9 +22,8 @@ export const NowPlayingList = () => {
         {data?.results.map((movie) => (
           <Link key={movie.id} href={`/movie/${movie.id}`}>
             <CardMovie
-              key={movie.id}
               onClick={() => setSelectedMovieId(movie.id)}
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
               title={movie.title}
             />
           </Link>

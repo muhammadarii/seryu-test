@@ -2,9 +2,32 @@ export interface Movie {
   id: number;
   title: string;
   overview: string;
+  tagline: string;
   poster_path: string;
   release_date: string;
   backdrop_path: string;
+  vote_average: number;
+  runtime: number;
+  genres: Genre[];
+  results: result[];
+}
+
+interface result {
+  id: number;
+  title: string;
+  overview: string;
+  tagline: string;
+  poster_path: string;
+  release_date: string;
+  backdrop_path: string;
+  vote_average: number;
+  runtime: number;
+  genres: Genre[];
+}
+
+interface Genre {
+  id: number;
+  name: string;
 }
 
 export interface MovieResponse {
@@ -15,4 +38,8 @@ export interface CardMovieProps {
   onClick: () => void;
   title: string;
   src: string;
+}
+
+export interface MovieDetailsResponse {
+  movie_id: number;
 }
