@@ -1,11 +1,12 @@
 "use client";
 import { RecomendationsList } from "@/components/section/RecomendationsList";
-import { fetchMovieDetails, fetchRecommendedMovies } from "@/lib/api";
+import { fetchMovieDetails, fetchRecommendedMovies } from "@/lib/Api";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import "react-circular-progressbar/dist/styles.css";
 import { MovieDetails } from "@/components/section/MovieDetails";
 import { useMovieStore } from "@/store/movieStore";
+import { LoaderCardMovie, LoaderDetailsMovie } from "@/components/parts/Loader";
 
 const DetailMoviePage = () => {
   const { id } = useParams();
@@ -33,7 +34,17 @@ const DetailMoviePage = () => {
     return `${hours}h ${mins}m`;
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex flex-col gap-[20px]">
+        <LoaderDetailsMovie />
+        <div className="flex flex-row items-center justify-center gap-[20px] mt-10">
+          {[...Array(6)].map((_, index) => (
+            <LoaderCardMovie key={index} />
+          ))}
+        </div>
+      </div>
+    );
   if (error) return <p>Failed to load movie details</p>;
 
   return (

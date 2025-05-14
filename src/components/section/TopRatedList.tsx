@@ -1,9 +1,10 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { CardMovie } from "../parts/CardMovie";
-import { fetchTopRatedMovies } from "@/lib/api";
+import { fetchTopRatedMovies } from "@/lib/Api";
 import { useMovieStore } from "@/store/movieStore";
 import Link from "next/link";
+import { LoaderCardMovie } from "../parts/Loader";
 
 export const TopRatedList = () => {
   const { data, isLoading, error } = useQuery({
@@ -15,12 +16,19 @@ export const TopRatedList = () => {
 
   const setSelectedMovieId = useMovieStore((state) => state.setSelectedMovieId);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex flex-row gap-[20px]">
+        {[...Array(6)].map((_, index) => (
+          <LoaderCardMovie key={index} />
+        ))}
+      </div>
+    );
   if (error) return <p>Failed to load movies</p>;
 
   return (
     <div>
-      <div className="overflow-x-auto h-[450px] scroll-smooth snap-y snap-mandatory scrollbar-hide">
+      <div className="overflow-x-auto h-[400px] scroll-smooth snap-y snap-mandatory scrollbar-hide">
         <div className="flex flex-row gap-[20px]">
           {results.slice(0, 10).map((movie) => (
             <Link key={movie.id} href={`/movie/${movie.id}`}>
