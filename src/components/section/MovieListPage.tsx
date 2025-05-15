@@ -6,12 +6,10 @@ import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { CardMovie } from "../parts/CardMovie";
 import { useMovieStore } from "@/store/movieStore";
-import Link from "next/link";
 import { Movie } from "@/types";
-import axios from "axios";
+// import axios from "axios";
 import { LoaderCardMovie } from "../parts/Loader";
-
-const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
+import { fetchMovieList } from "@/lib/Api";
 
 interface MovieListPageProps {
   type: "favorites" | "watchlist";
@@ -34,31 +32,21 @@ export const MovieListPage: React.FC<MovieListPageProps> = ({ type }) => {
     }
   }, [isLoggedIn, router]);
 
-  const fetchMovies = async () => {
+  const ListMovies = async () => {
     try {
-      const movieDetails = await Promise.all(
-        movieIds.map(async (id) => {
-          const response = await axios.get(
-            `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`,
-            {
-              headers: {
-                Authorization: `Bearer ${API_KEY}`,
-              },
-            }
-          );
-          return response.data;
-        })
+      const movieList = await Promise.all(
+        movieIds.map((id) => fetchMovieList(id))
       );
-
-      setMovies(movieDetails);
+      setMovies(movieList);
       setLoading(false);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error("Error fetching movie list:", error);
     }
   };
 
   useEffect(() => {
-    fetchMovies();
+    ListMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movieIds]);
 
   const setSelectedMovieId = useMovieStore((state) => state.setSelectedMovieId);
@@ -67,7 +55,9 @@ export const MovieListPage: React.FC<MovieListPageProps> = ({ type }) => {
     return (
       <div className="flex flex-row gap-[20px]">
         {[...Array(6)].map((_, index) => (
-          <LoaderCardMovie key={index} />
+          <div key={index} className="mt-10">
+            <LoaderCardMovie />
+          </div>
         ))}
       </div>
     );
@@ -81,16 +71,15 @@ export const MovieListPage: React.FC<MovieListPageProps> = ({ type }) => {
         <div className="overflow-x-auto h-[400px] scroll-smooth snap-y snap-mandatory scrollbar-hide">
           <div className="flex flex-row gap-[20px]">
             {movies.map((movie) => (
-              <Link key={movie.id} href={`/movie/${movie.id}`}>
-                <CardMovie
-                  id={movie.id}
-                  title={movie.title}
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  onClick={() => {
-                    setSelectedMovieId(movie.id);
-                  }}
-                />
-              </Link>
+              <CardMovie
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                onClick={() => {
+                  setSelectedMovieId(movie.id);
+                }}
+              />
             ))}
           </div>
         </div>

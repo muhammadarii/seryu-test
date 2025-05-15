@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { CardMovie } from "../parts/CardMovie";
 import { fetchTopRatedMovies } from "@/lib/Api";
 import { useMovieStore } from "@/store/movieStore";
-import Link from "next/link";
 import { LoaderCardMovie } from "../parts/Loader";
 
 export const TopRatedList = () => {
@@ -31,28 +30,26 @@ export const TopRatedList = () => {
       <div className="overflow-x-auto h-[400px] scroll-smooth snap-y snap-mandatory scrollbar-hide">
         <div className="flex flex-row gap-[20px]">
           {results.slice(0, 10).map((movie) => (
-            <Link key={movie.id} href={`/movie/${movie.id}`}>
-              <CardMovie
-                id={movie.id}
-                onClick={() => setSelectedMovieId(movie.id)}
-                title={movie.title}
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
-              />
-            </Link>
+            <CardMovie
+              key={movie.id}
+              id={movie.id}
+              onClick={() => setSelectedMovieId(movie.id)}
+              title={movie.title}
+              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
+            />
           ))}
         </div>
       </div>
       <div className="overflow-x-auto h-[400px] scroll-smooth snap-y snap-mandatory scrollbar-hide">
         <div className="flex flex-row gap-[20px]">
           {results.slice(10, 20).map((movie) => (
-            <Link key={movie.id} href={`/movie/${movie.id}`}>
-              <CardMovie
-                id={movie.id}
-                onClick={() => setSelectedMovieId(movie.id)}
-                title={movie.title}
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
-              />
-            </Link>
+            <CardMovie
+              key={movie.id}
+              id={movie.id}
+              onClick={() => setSelectedMovieId(movie.id)}
+              title={movie.title}
+              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
+            />
           ))}
         </div>
       </div>

@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { CardMovie } from "../parts/CardMovie";
 import { fetchNowPlayingMovies } from "@/lib/Api";
 import { useMovieStore } from "@/store/movieStore";
-import Link from "next/link";
 import { LoaderCardMovie } from "../parts/Loader";
 
 export const NowPlayingList = () => {
@@ -30,14 +29,13 @@ export const NowPlayingList = () => {
     <div className="overflow-x-auto h-[400px] scroll-smooth snap-y snap-mandatory scrollbar-hide">
       <div className="flex flex-row gap-[20px]">
         {data?.results.map((movie) => (
-          <Link key={movie.id} href={`/movie/${movie.id}`}>
-            <CardMovie
-              id={movie.id}
-              onClick={() => setSelectedMovieId(movie.id)}
-              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
-              title={movie.title}
-            />
-          </Link>
+          <CardMovie
+            key={movie.id}
+            id={movie.id}
+            onClick={() => setSelectedMovieId(movie.id)}
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
+            title={movie.title}
+          />
         ))}
       </div>
     </div>

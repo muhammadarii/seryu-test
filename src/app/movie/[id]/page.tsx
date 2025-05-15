@@ -56,7 +56,7 @@ const DetailMoviePage = () => {
           userScore={userScore}
         />
       )}
-      <div className="flex flex-col px-[142px] mt-[50px]">
+      <div className="flex flex-col px-8 lg:px-[142px] mt-[50px]">
         <h1 className="text-[20px] font-semibold">Recommendations</h1>
         <RecomendationsList
           data={dataRecomendation ?? []}

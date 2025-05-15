@@ -86,3 +86,20 @@ export const fetchRecommendedMovies = async (
     throw error;
   }
 };
+
+export const fetchMovieList = async (id: number): Promise<Movie> => {
+  try {
+    const response = await axios.get<Movie>(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching movie list:", error);
+    throw error;
+  }
+};

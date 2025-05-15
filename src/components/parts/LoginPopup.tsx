@@ -16,20 +16,15 @@ export const LoginPopup = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/20 bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="absolute inset-0 bg-black opacity-50" onClick={onClose} />
       <div className="flex flex-col items-center">
         <div
           onClick={handleLogin}
-          className="w-[250px] h-[250px] rounded-[24px] bg-white items-center justify-center flex cursor-pointer"
+          className="w-[250px] h-[250px] rounded-[24px] bg-white items-center justify-center flex cursor-pointer z-50"
         >
           <Image src={TMDB} alt="TMDB Logo" />
         </div>
-        <button
-          onClick={onClose}
-          className="text-sm text-gray-400 hover:underline mt-2"
-        >
-          CLose
-        </button>
       </div>
     </div>
   );

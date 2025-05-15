@@ -4,8 +4,8 @@ import { useToggleCardStore } from "@/store/toggleCardStore";
 import { CardMovieProps } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { CiBookmark, CiHeart } from "react-icons/ci";
-import { FaHeart, FaBookmark } from "react-icons/fa";
+import { ToggleCard } from "./ToggleCard";
+import Link from "next/link";
 
 export const CardMovie: React.FC<CardMovieProps> = ({
   onClick,
@@ -35,51 +35,23 @@ export const CardMovie: React.FC<CardMovieProps> = ({
       className="bg-[#050E12] w-[193.09px] h-[355.1px] rounded-[6px]"
     >
       <div className="relative">
+        <Link
+          href={`/movie/${id}`}
+          className="absolute top-0 left-0 w-full h-full cursor-pointer z-10"
+        />
         <div className="w-[193px] h-[289px] relative rounded-t-[6px] overflow-hidden">
           <Image src={src} alt={title} fill className="object-cover" />
         </div>
         {/* toggle fav and watchlist */}
-        <div className="z-10 flex flex-row absolute bottom-[10px] right-[10px] gap-[10px]">
-          {isLoggedIn ? (
-            <>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleProtectedAction(() => toggleWatchlist(id));
-                }}
-                title="Add to Watchlist"
-              >
-                {isWatchlist ? (
-                  <FaBookmark size={20} color="white" />
-                ) : (
-                  <CiBookmark size={25} color="white" />
-                )}
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleProtectedAction(() => toggleFavorite(id));
-                }}
-                title="Add to Favorite"
-              >
-                {isFavorite ? (
-                  <FaHeart size={20} color="red" />
-                ) : (
-                  <CiHeart size={25} color="white" />
-                )}
-              </button>
-            </>
-          ) : (
-            <>
-              <span title="Login to add to Watchlist">
-                <CiBookmark size={25} color="white" />
-              </span>
-              <span title="Login to add to Favorite">
-                <CiHeart size={25} color="white" />
-              </span>
-            </>
-          )}
-        </div>
+        <ToggleCard
+          id={id}
+          isFavorite={isFavorite}
+          isWatchlist={isWatchlist}
+          toggleFavorite={toggleFavorite}
+          toggleWatchlist={toggleWatchlist}
+          isLoggedIn={isLoggedIn}
+          handleProtectedAction={handleProtectedAction}
+        />
       </div>
       <div className="px-[18px] py-[15px]">
         <h1 className="text-[18px] font-bold text-[#B6B6B6] truncate">
