@@ -3,7 +3,7 @@ import axios from "axios";
 export const FetchLogin = async () => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/authentication/token/new?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
@@ -12,7 +12,7 @@ export const FetchLogin = async () => {
     );
     const requestToken = response.data.request_token;
 
-    window.location.href = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${window.location.origin}/auth/callback`;
+    window.location.href = `${process.env.NEXT_PUBLIC_CALLBACK_URL}/authenticate/${requestToken}?redirect_to=${window.location.origin}/auth/callback`;
   } catch (err) {
     console.error("Error fetching request token:", err);
     throw err;
@@ -22,7 +22,7 @@ export const FetchLogin = async () => {
 export const FetchSession = async (requestToken: string) => {
   try {
     const response = await axios.post(
-      `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/authentication/session/new?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
       {
         request_token: requestToken,
       },

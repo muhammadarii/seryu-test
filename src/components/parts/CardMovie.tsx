@@ -42,7 +42,6 @@ export const CardMovie: React.FC<CardMovieProps> = ({
         <div className="w-[193px] h-[289px] relative rounded-t-[6px] overflow-hidden">
           <Image src={src} alt={title} fill className="object-cover" />
         </div>
-        {/* toggle fav and watchlist */}
         <ToggleCard
           id={id}
           isFavorite={isFavorite}

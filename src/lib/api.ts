@@ -103,3 +103,20 @@ export const fetchMovieList = async (id: number): Promise<Movie> => {
     throw error;
   }
 };
+
+export const fetchSearchResults = async (query: string): Promise<Movie[]> => {
+  try {
+    const response = await axios.get<MovieResponse>(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/search/movie?query=${query}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+        },
+      }
+    );
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+    throw error;
+  }
+};
