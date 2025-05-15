@@ -67,7 +67,7 @@ export const fetchRecommendedMovies = async (
   movie_id: number
 ): Promise<Movie[]> => {
   try {
-    const response = await axios.get<Movie[]>(
+    const response = await axios.get<MovieResponse>(
       `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${movie_id}/recommendations`,
       {
         headers: {
@@ -79,7 +79,7 @@ export const fetchRecommendedMovies = async (
         },
       }
     );
-    console.log(response.data);
+
     return response.data.results;
   } catch (error) {
     console.error("Error fetching recommended movies:", error);
