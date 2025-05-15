@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Logo from "@/assets/images/CINEMA.png";
+import Logout from "@/assets/images/Logout.png";
 import Link from "next/link";
 import { useState } from "react";
 import { LoginPopup } from "../LoginPopup";
@@ -35,7 +36,11 @@ export const Navbar = () => {
           <Link href="/watchlist" onClick={handleProtectedRoute}>
             Watchlist
           </Link>
-          {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
+          {isLoggedIn && (
+            <button onClick={handleLogout}>
+              <Image src={Logout} alt="TMDB Logo" className="w-auto h-5" />
+            </button>
+          )}
         </div>
       </nav>
       <LoginPopup isOpen={isOpen} onClose={() => setIsOpen(false)} />

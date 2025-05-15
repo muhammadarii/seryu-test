@@ -28,7 +28,7 @@ export const LoginPopup = ({
           onClick={onClose}
           className="text-sm text-gray-400 hover:underline mt-2"
         >
-          Close
+          CLose
         </button>
       </div>
     </div>

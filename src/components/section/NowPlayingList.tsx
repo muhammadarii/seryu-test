@@ -32,6 +32,7 @@ export const NowPlayingList = () => {
         {data?.results.map((movie) => (
           <Link key={movie.id} href={`/movie/${movie.id}`}>
             <CardMovie
+              id={movie.id}
               onClick={() => setSelectedMovieId(movie.id)}
               src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
               title={movie.title}

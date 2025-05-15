@@ -38,6 +38,7 @@ export interface CardMovieProps {
   onClick: () => void;
   title: string;
   src: string;
+  id: number;
 }
 
 export interface MovieDetailsResponse {

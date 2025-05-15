@@ -33,7 +33,7 @@ export const TopRatedList = () => {
           {results.slice(0, 10).map((movie) => (
             <Link key={movie.id} href={`/movie/${movie.id}`}>
               <CardMovie
-                key={movie.id}
+                id={movie.id}
                 onClick={() => setSelectedMovieId(movie.id)}
                 title={movie.title}
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
@@ -47,6 +47,7 @@ export const TopRatedList = () => {
           {results.slice(10, 20).map((movie) => (
             <Link key={movie.id} href={`/movie/${movie.id}`}>
               <CardMovie
+                id={movie.id}
                 onClick={() => setSelectedMovieId(movie.id)}
                 title={movie.title}
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}

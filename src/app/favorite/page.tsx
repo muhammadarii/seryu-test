@@ -1,17 +1,10 @@
-"use client";
-import { useAuthStore } from "@/store/authStore";
-import { redirect } from "next/navigation";
-import { useEffect } from "react";
-
+import { MovieListPage } from "@/components/section/MovieListPage";
 const FavoritePage = () => {
-  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      redirect("/");
-    }
-  }, [isLoggedIn]);
-  return <div>Favorite Page</div>;
+  return (
+    <div className="px-8 lg:px-[142px]">
+      <MovieListPage type="favorites" />
+    </div>
+  );
 };
 
 export default FavoritePage;

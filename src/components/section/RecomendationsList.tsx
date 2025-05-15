@@ -17,6 +17,7 @@ export const RecomendationsList: React.FC<RecomendationsListProps> = ({
         {data.map((movie) => (
           <Link key={movie.id} href={`/movie/${movie.id}`}>
             <CardMovie
+              id={movie.id}
               onClick={() => setSelectedMovieId(movie.id)}
               title={movie.title}
               src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}

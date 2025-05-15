@@ -1,10 +1,9 @@
-// app/auth/callback/page.tsx
 "use client";
 
 import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import axios from "axios";
-import { useAuthStore } from "@/store/authStore"; // Gunakan zustand misalnya
+import { useAuthStore } from "@/store/authStore";
 
 const AuthCallback = () => {
   const params = useSearchParams();
