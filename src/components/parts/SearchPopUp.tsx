@@ -20,18 +20,13 @@ export const SearchPopUp = () => {
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
     setIsLoading(true);
-
-    try {
-      fetchSearchResults(searchTerm).then((data) => {
+    fetchSearchResults(searchTerm)
+      .then((data) => {
         setResults(data);
         setShowPopup(true);
         setIsLoading(false);
-      });
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    } finally {
-      setIsLoading(false);
-    }
+      })
+      .catch((error) => console.error(error));
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

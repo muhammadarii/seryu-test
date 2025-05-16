@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { CardMovie } from "../parts/CardMovie";
 import { useMovieStore } from "@/store/movieStore";
 import { Movie } from "@/types";
-// import axios from "axios";
 import { LoaderCardMovie } from "../parts/Loader";
 import { fetchMovieList } from "@/lib/Api";
 
