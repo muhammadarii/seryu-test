@@ -32,25 +32,28 @@ export const CardMovie: React.FC<CardMovieProps> = ({
   return (
     <div
       onClick={onClick}
-      className="bg-[#050E12] w-[193.09px] h-[355.1px] rounded-[6px]"
+      className="relative group bg-[#050E12] w-[193.09px] h-[355.1px] rounded-[6px]"
     >
       <div className="relative">
-        <Link
-          href={`/movie/${id}`}
-          className="absolute top-0 left-0 w-full h-full cursor-pointer z-10"
-        />
         <div className="w-[193px] h-[289px] relative rounded-t-[6px] overflow-hidden">
           <Image src={src} alt={title} fill className="object-cover" />
         </div>
-        <ToggleCard
-          id={id}
-          isFavorite={isFavorite}
-          isWatchlist={isWatchlist}
-          toggleFavorite={toggleFavorite}
-          toggleWatchlist={toggleWatchlist}
-          isLoggedIn={isLoggedIn}
-          handleProtectedAction={handleProtectedAction}
-        />
+        <div className="absolute top-0 left-0 w-full h-[289px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+          <div className="absolute top-0 left-0 w-full h-full bg-[#0A1C24] opacity-50" />
+          <Link
+            href={`/movie/${id}`}
+            className="absolute top-0 left-0 w-full h-full cursor-pointer z-20"
+          />
+          <ToggleCard
+            id={id}
+            isFavorite={isFavorite}
+            isWatchlist={isWatchlist}
+            toggleFavorite={toggleFavorite}
+            toggleWatchlist={toggleWatchlist}
+            isLoggedIn={isLoggedIn}
+            handleProtectedAction={handleProtectedAction}
+          />
+        </div>
       </div>
       <div className="px-[18px] py-[15px]">
         <h1 className="text-[18px] font-bold text-[#B6B6B6] truncate">

@@ -25,7 +25,7 @@ export const Callback = () => {
       router.push("/");
     } catch (error) {
       console.error("Failed to create session:", error);
-      router.push("/login");
+      router.push("/");
     }
   };
 

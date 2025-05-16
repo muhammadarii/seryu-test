@@ -26,8 +26,8 @@ export const Navbar = () => {
     redirect("/");
   };
   return (
-    <>
-      <nav className="py-[14px] px-8 lg:px-[142px] flex justify-between items-center bg-[#0EA5E9] text-white relative z-50">
+    <nav className="fixed top-0 left-0 w-full shadow-lg z-50">
+      <div className="py-[14px] px-8 lg:px-[142px] flex justify-between items-center bg-[#0EA5E9] text-white relative z-50">
         <Link href="/">
           <Image
             src={Logo}
@@ -63,9 +63,9 @@ export const Navbar = () => {
             </button>
           )}
         </div>
-      </nav>
+      </div>
 
       <LoginPopup isOpen={isOpen} onClose={() => setIsOpen(false)} />
-    </>
+    </nav>
   );
 };

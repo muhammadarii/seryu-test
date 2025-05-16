@@ -68,20 +68,18 @@ export const MovieListPage: React.FC<MovieListPageProps> = ({ type }) => {
       {movies.length === 0 ? (
         <p>Tidak ada film dalam {type} kamu.</p>
       ) : (
-        <div className="overflow-x-auto h-[400px] scroll-smooth snap-y snap-mandatory scrollbar-hide">
-          <div className="flex flex-row gap-[20px]">
-            {movies.map((movie) => (
-              <CardMovie
-                key={movie.id}
-                id={movie.id}
-                title={movie.title}
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                onClick={() => {
-                  setSelectedMovieId(movie.id);
-                }}
-              />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          {movies.map((movie) => (
+            <CardMovie
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
+              onClick={() => {
+                setSelectedMovieId(movie.id);
+              }}
+            />
+          ))}
         </div>
       )}
     </div>
