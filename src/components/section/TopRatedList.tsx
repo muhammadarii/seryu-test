@@ -11,8 +11,6 @@ export const TopRatedList = () => {
     queryFn: fetchTopRatedMovies,
   });
 
-  const results = data?.results || [];
-
   const setSelectedMovieId = useMovieStore((state) => state.setSelectedMovieId);
 
   if (isLoading)
@@ -27,22 +25,9 @@ export const TopRatedList = () => {
 
   return (
     <div>
-      <div className="overflow-x-auto h-[400px] scroll-smooth snap-y snap-mandatory scrollbar-hide">
-        <div className="flex flex-row gap-[20px]">
-          {results.slice(0, 10).map((movie) => (
-            <CardMovie
-              key={movie.id}
-              id={movie.id}
-              onClick={() => setSelectedMovieId(movie.id)}
-              title={movie.title}
-              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${movie.poster_path}`}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="overflow-x-auto h-[400px] scroll-smooth snap-y snap-mandatory scrollbar-hide">
-        <div className="flex flex-row gap-[20px]">
-          {results.slice(10, 20).map((movie) => (
+      <div className="">
+        <div className="grid grid-cols-6 gap-[20px]">
+          {data?.results.map((movie) => (
             <CardMovie
               key={movie.id}
               id={movie.id}
